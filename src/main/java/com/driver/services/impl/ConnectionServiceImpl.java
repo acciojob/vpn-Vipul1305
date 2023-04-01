@@ -50,7 +50,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
                 for (Country country: serviceProviderList.get(0).getCountryList()){
                     if(country.getCountryName().toCode().equals(countryName1.toCode())){
-                        user.setCountry(country);
+                        user.setOriginalCountry(country);
                     }
                 }
 
@@ -88,7 +88,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         country.setUser(user);
         country.setServiceProvider(null);
 
-        user.setCountry(country);
+        user.setOriginalCountry(country);
 
         userRepository2.save(user);
         return user;
@@ -98,8 +98,8 @@ public class ConnectionServiceImpl implements ConnectionService {
     public User communicate(int senderId, int receiverId) throws Exception {
         User sender = userRepository2.findById(senderId).get();
         User recever = userRepository2.findById(receiverId).get();
-        Country senderCountry = sender.getCountry();
-        Country receverCountry = recever.getCountry();
+        Country senderCountry = sender.getOriginalCountry();
+        Country receverCountry = recever.getOriginalCountry();
 
         User updatedSender;
         if(senderCountry.getCountryName() != receverCountry.getCountryName()){
