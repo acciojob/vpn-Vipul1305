@@ -19,7 +19,7 @@ public class User {
 
     private String maskedIp;
 
-    private boolean connected;
+    private Boolean connected;
 
     @ManyToMany(mappedBy = "userList",cascade = CascadeType.ALL)
     List<ServiceProvider> serviceProviderList = new ArrayList<>();
