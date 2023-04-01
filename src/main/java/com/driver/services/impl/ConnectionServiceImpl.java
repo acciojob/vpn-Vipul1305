@@ -28,7 +28,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         CountryName countryName1 = CountryName.valueOf(countryNameInUpperCase);
 
         User user = userRepository2.findById(userId).get();
-        if(user.isConnected()){
+        if(user.getConnected()){
             throw new Exception("Already connected");
         }
         else if(user.getOriginalIp().equals(countryName1.toCode())){
@@ -74,7 +74,7 @@ public class ConnectionServiceImpl implements ConnectionService {
     @Override
     public User disconnect(int userId) throws Exception {
         User user = userRepository2.findById(userId).get();
-        if(!user.isConnected()){
+        if(!user.getConnected()){
             throw new Exception("Already disconnected");
         }
         user.setConnected(false);
